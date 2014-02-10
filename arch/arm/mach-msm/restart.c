@@ -349,7 +349,9 @@ void msm_restart(char mode, const char *cmd)
 		__raw_writel(CONFIG_WARMBOOT_CRASH, restart_reason);
 #else
 		__raw_writel(CONFIG_WARMBOOT_NORMAL, restart_reason);
+#ifdef CONFIG_CCI_KLOG	
 		*backupcrashflag = CONFIG_WARMBOOT_CRASH;
+#endif	
 #endif	
 	}
 	/* Write download mode flags if restart_mode says so */

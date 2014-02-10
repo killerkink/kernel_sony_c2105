@@ -169,7 +169,9 @@ static void lpass_fatal_fn(struct work_struct *work)
 	__raw_writel(CONFIG_WARMBOOT_CRASH, restart_reason);
 #else
 	__raw_writel(CONFIG_WARMBOOT_NORMAL, restart_reason);
+#ifdef CONFIG_CCI_KLOG		
 	*backupcrashflag = CONFIG_WARMBOOT_CRASH;
+#endif	
 #endif	
 	mb();
 	panic(MODULE_NAME ": Resetting the SoC");
@@ -203,7 +205,9 @@ static void lpass_smsm_state_cb(void *data, uint32_t old_state,
 		__raw_writel(CONFIG_WARMBOOT_CRASH, restart_reason);
 #else
 		__raw_writel(CONFIG_WARMBOOT_NORMAL, restart_reason);
+#ifdef CONFIG_CCI_KLOG			
 		*backupcrashflag = CONFIG_WARMBOOT_CRASH;
+#endif	
 #endif	
 		mb();
 		panic(MODULE_NAME ": Resetting the SoC");

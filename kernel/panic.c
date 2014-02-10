@@ -115,7 +115,9 @@ void panic(const char *fmt, ...)
 		__raw_writel(CONFIG_WARMBOOT_CRASH, restart_reason);
 #else
 	__raw_writel(CONFIG_WARMBOOT_NORMAL, restart_reason);
+#ifdef CONFIG_CCI_KLOG		
 	*backupcrashflag = CONFIG_WARMBOOT_CRASH;
+#endif	
 #endif	
 	coresight_abort();
 	/*
